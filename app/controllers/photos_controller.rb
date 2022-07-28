@@ -48,11 +48,15 @@ class PhotosController < ApplicationController
   end
 
   # DELETE /photos/1 or /photos/1.json
-  def destroy:user_id
+  def destroy
+    @photo.destroy
+
+    respond_to do |format|
       format.html { redirect_to photos_url, notice: "Photo was successfully destroyed." }
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -62,6 +66,6 @@ class PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:url, :comment, :active )
+      params.require(:photo).permit(:comment, :active, :image)
     end
 end
